@@ -1,6 +1,9 @@
-# starred-repos
+# Starred repos
 
-This template should help get you started developing with Vue 3 in Vite.
+## Future Plans
+
+- pagination
+- encode the query in the fetch call
 
 ## Recommended IDE Setup
 
