@@ -5,7 +5,6 @@ import { onMounted, ref } from 'vue'
 
 const from = ref(new Date())
 const to = ref(new Date())
-let dateRangeQuery: string = '+created:'
 
 const emit = defineEmits<{
   (event: 'dateRangeSelectionChange', payload: { dateRangeQuery: string }): void
