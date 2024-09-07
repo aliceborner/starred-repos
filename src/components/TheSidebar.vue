@@ -6,14 +6,28 @@ import Divider from 'primevue/divider'
 import Button from 'primevue/button'
 import { ref } from 'vue'
 
-const searchQuery = ref('')
+const queryBuffer = ref('')
 
 const emit = defineEmits<{
   (event: 'search', payload: { searchQuery: string }): void
 }>()
 
 const performSearch = () => {
-  emit('search', { searchQuery: searchQuery.value })
+  const suffix = '&sort=stars&order=desc'
+  const searchQuery = queryBuffer.value.concat(suffix)
+  emit('search', { searchQuery })
+}
+
+const handleLanguageSelection = (payload: { languagesQuery: string }) => {
+  queryBuffer.value = queryBuffer.value.concat(payload.languagesQuery)
+}
+
+const handleDateRangeSelectionChange = (payload: { dateRangeQuery: string }) => {
+  queryBuffer.value = queryBuffer.value.concat(payload.dateRangeQuery)
+}
+
+const handleStarSelectionChange = (payload: { minStarsQuery: string }) => {
+  queryBuffer.value = queryBuffer.value.concat(payload.minStarsQuery)
 }
 </script>
 
@@ -21,11 +35,11 @@ const performSearch = () => {
   <div class="flex flex-col min-h-screen">
     <h2 class="text-2xl">Filters</h2>
     <Divider />
-    <LanguageFilters></LanguageFilters>
+    <LanguageFilters @languageSelectionChange="handleLanguageSelection"></LanguageFilters>
     <Divider />
-    <DateRangePicker></DateRangePicker>
+    <DateRangePicker @dateRangeSelectionChange="handleDateRangeSelectionChange"></DateRangePicker>
     <Divider />
-    <StarPicker></StarPicker>
+    <StarPicker @starSelectionChange="handleStarSelectionChange"></StarPicker>
     <Divider />
     <Button v-on:click="performSearch()">Search selected filters</Button>
   </div>

@@ -4,6 +4,9 @@
 
 - pagination
 - encode the query in the fetch call
+- pagination
+- form validations (e.g at least one language selected?)
+- unit tests & integration tests
 
 ## Recommended IDE Setup
 
