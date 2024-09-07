@@ -20,6 +20,10 @@ const dateRangeSelectionChange = () => {
 
   emit('dateRangeSelectionChange', { dateRangeQuery })
 }
+
+onMounted(() => {
+  dateRangeSelectionChange()
+})
 </script>
 
 <template>

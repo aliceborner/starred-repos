@@ -4,9 +4,10 @@ import DateRangePicker from './DateRangePicker.vue'
 import StarPicker from './StarPicker.vue'
 import Divider from 'primevue/divider'
 import Button from 'primevue/button'
-import { ref } from 'vue'
 
-const queryBuffer = ref('')
+let languageQuery = ''
+let dateRangeQuery = ''
+let starsQuery = ''
 
 const emit = defineEmits<{
   (event: 'search', payload: { searchQuery: string }): void
@@ -14,20 +15,20 @@ const emit = defineEmits<{
 
 const performSearch = () => {
   const suffix = '&sort=stars&order=desc'
-  const searchQuery = queryBuffer.value.concat(suffix)
+  const searchQuery = languageQuery + dateRangeQuery + starsQuery + suffix
   emit('search', { searchQuery })
 }
 
 const handleLanguageSelection = (payload: { languagesQuery: string }) => {
-  queryBuffer.value = queryBuffer.value.concat(payload.languagesQuery)
+  languageQuery = payload.languagesQuery
 }
 
 const handleDateRangeSelectionChange = (payload: { dateRangeQuery: string }) => {
-  queryBuffer.value = queryBuffer.value.concat(payload.dateRangeQuery)
+  dateRangeQuery = payload.dateRangeQuery
 }
 
 const handleStarSelectionChange = (payload: { minStarsQuery: string }) => {
-  queryBuffer.value = queryBuffer.value.concat(payload.minStarsQuery)
+  starsQuery = payload.minStarsQuery
 }
 </script>
 

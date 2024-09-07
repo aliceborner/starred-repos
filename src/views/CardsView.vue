@@ -21,7 +21,6 @@ const error = ref<string | null>(null)
 
 const handleSearch = async (payload: { searchQuery: string }) => {
   const url = `https://api.github.com/search/repositories?q=${payload.searchQuery}`
-
   loading.value = true
   error.value = null
 
