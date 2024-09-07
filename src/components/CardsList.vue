@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { Repository } from '@/types/repositories'
-import { ref, type PropType } from 'vue'
+import type { Repository } from '@/types/search-response'
 
 const props = defineProps({
   repositories: {

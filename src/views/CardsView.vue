@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import CardsList from '@/components/CardsList.vue'
-import type { SearchResponse } from '@/types/repositories'
-import Button from 'primevue/button'
-import { ref, onMounted } from 'vue'
+import type { SearchResponse } from '@/types/search-response'
+import { ref } from 'vue'
+import TheSidebar from '@/components/TheSidebar.vue'
 
 defineProps({
   title: {
@@ -19,8 +19,8 @@ const searchResponse = ref<SearchResponse>()
 const loading = ref(false)
 const error = ref<string | null>(null)
 
-async function searchRepositories(query: string) {
-  const url = `https://api.github.com/search/repositories?q=${query}`
+const handleSearch = async (payload: { searchQuery: string }) => {
+  const url = `https://api.github.com/search/repositories?q=${payload.searchQuery}`
 
   loading.value = true
   error.value = null
@@ -42,11 +42,15 @@ async function searchRepositories(query: string) {
 </script>
 
 <template>
-  <h1 class="text-3xl font-bold">{{ title }}</h1>
-  <Button v-on:click="searchRepositories('tetris+language:assembly&sort=stars&order=desc')"
-    >Test</Button
-  >
-  <CardsList :repositories="searchResponse?.items"></CardsList>
+  <div class="flex">
+    <aside>
+      <TheSidebar @search="handleSearch" class="min-w-[150px] pr-4" />
+    </aside>
+    <div class="flex flex-col border-l-2 pl-4">
+      <h1 class="text-3xl font-bold">{{ title }}</h1>
+      <CardsList :repositories="searchResponse?.items"></CardsList>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>

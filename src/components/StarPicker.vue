@@ -2,9 +2,9 @@
 import InputNumber from 'primevue/inputnumber'
 import { ref } from 'vue'
 
-const value = ref(0)
+const value = ref(50)
 </script>
 
 <template>
-  <InputNumber v-model="value" inputId="integeronly" fluid />
+  <span>With at least <InputNumber v-model="value" inputId="integeronly" fluid /> stars</span>
 </template>

@@ -1,40 +1,11 @@
 <script setup lang="ts">
-import TheSidebar from './components/TheSidebar.vue'
-import HomeView from './views/HomeView.vue'
+import CardsView from './views/CardsView.vue'
 </script>
 
 <template>
-  <main>
-    <TheSidebar></TheSidebar>
-    <HomeView></HomeView>
-  </main>
+  <div class="flex min-h-screen flex-col flex-grow p-4">
+    <main>
+      <CardsView />
+    </main>
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>

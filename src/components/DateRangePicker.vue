@@ -2,11 +2,11 @@
 import DatePicker from 'primevue/datepicker'
 import { ref } from 'vue'
 
-const from = ref('')
-const to = ref('')
+const from = ref(new Date())
+const to = ref(new Date())
 </script>
 
 <template>
-  <DatePicker v-model="from" />
-  <DatePicker v-model="to" />
+  <span>From <DatePicker v-model="from" /></span>
+  <span>To <DatePicker v-model="to" /></span>
 </template>
