@@ -31,3 +31,6 @@ Like this you can have a quick look at the current state of the Starred repos in
 - language picker from static list? is there no where we can get a list of programming languages from?
 - min star input is not well designed, think about alternatives
 - unit tests & integration tests
+  - as for sake of being a quick project I deprioritized the tests, but a couple of test cases to cover would be:
+  - test the form validations: should show search button disabled when no language selected, and vice versa, or that the button is also disabled if date 'to' is before date 'from', potentially also with a red outline, or asserting that error messages are displayed.
+  - test the integration of components, so if the search button triggers the API call with the correct search query, test if correct results are displayed (in this case we would need a mock with many results, in which we can filter and always have the same results, so we can assert reliably on them)
