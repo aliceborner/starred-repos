@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import CardsList from '@/components/CardsList.vue'
+import CardsList from '@/components/library/CardsList.vue'
 import { useSearchStore } from '@/stores/search-store'
 import type { SearchResponse } from '@/types/search-response'
 import { ref, watch } from 'vue'
 
-const searchResponse = ref<SearchResponse>()
+const searchResponse = ref<SearchResponse>({ items: [], total_count: 0 })
+const selectedLanguages = ref<string[]>([])
 const loading = ref(false)
 const error = ref<string | null>(null)
 const searchStore = useSearchStore()
 
 watch(
-  () => searchStore.searchQuery,
-  (newSearchQuery) => {
+  [() => searchStore.searchQuery, () => searchStore.searchSelectedLanguages],
+  ([newSearchQuery, newSearchSelectedLanguages]) => {
     fetchRepositories(newSearchQuery)
+    selectedLanguages.value = newSearchSelectedLanguages
   }
 )
 
@@ -40,7 +42,10 @@ const fetchRepositories = async (newSearchQuery: string) => {
 <template>
   <div class="flex flex-col pl-4">
     <h1 class="text-3xl font-bold">Github Repositories</h1>
-    <CardsList :repositories="searchResponse?.items"></CardsList>
+    <CardsList
+      :repositories="searchResponse?.items"
+      :selectedLanguages="selectedLanguages"
+    ></CardsList>
   </div>
 </template>
 

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Chip from 'primevue/chip'
 import TreeSelect from 'primevue/treeselect'
+import { useSearchStore } from '@/stores/search-store'
 
 interface Language {
   key: string
@@ -15,6 +16,7 @@ const languages = ref<Language[]>([
   { key: '2', label: 'JavaScript', isSelected: false },
   { key: '3', label: 'C', isSelected: false }
 ])
+const searchStore = useSearchStore()
 
 const emit = defineEmits<{
   (event: 'languageSelectionChange', payload: { languagesQuery: string }): void
@@ -22,13 +24,16 @@ const emit = defineEmits<{
 
 const languageSelectionChange = () => {
   let languagesQuery: string = '+language:'
+  let selectedLanguages: string[] = []
 
   for (const language of languages.value) {
     if (language.isSelected) {
+      selectedLanguages.push(language.label)
       languagesQuery = languagesQuery.concat(language.label + ',')
     }
   }
 
+  searchStore.setSearchSelectedLanguages(selectedLanguages)
   emit('languageSelectionChange', { languagesQuery })
 }
 

@@ -1,41 +1,26 @@
 <script setup lang="ts">
 import type { Repository } from '@/types/search-response'
 import Card from 'primevue/card'
-import { format } from 'date-fns'
+import RepositoryItem from './RepositoryItem.vue'
+import Divider from 'primevue/divider'
 
-const props = defineProps<{
-  repository: Repository
+defineProps<{
+  language: string
+  repositories: Repository[]
 }>()
-
-const formattedDate = () => {
-  return format(props.repository.created_at, 'yyyy-MM-dd')
-}
 </script>
 
 <template>
-  <Card class="h-full">
-    <template #title
-      ><a :href="repository.html_url" target="_blank">{{ repository.name }}</a></template
-    >
+  <Card>
+    <template #title>{{ language }}</template>
     <template #content>
-      <div class="flex flex-col justify-between gap-4 h-full">
-        <p class="m-0">
-          {{ repository.description }}
-        </p>
-        <div>
-          <p class="m-0"><i class="pi pi-calendar mr-2"></i> Created at {{ formattedDate() }}</p>
-          <p class="m-0">
-            <i class="pi pi-star mr-2"></i> Stars count {{ repository.stargazers_count }}
-          </p>
-        </div>
-      </div>
+      <ul v-if="repositories.length" class="flex flex-col gap-2 h-96 overflow-y-auto">
+        <li v-for="repository in repositories" :key="repository.id">
+          <RepositoryItem :repository="repository"></RepositoryItem>
+          <Divider />
+        </li>
+      </ul>
+      <p v-else>Select search parameters and click on Search!</p>
     </template>
   </Card>
 </template>
-
-<style>
-.p-card-body,
-.p-card-content {
-  height: 100%;
-}
-</style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import LanguageFilters from './LanguageFilters.vue'
-import DateRangePicker from './DateRangePicker.vue'
-import StarPicker from './StarPicker.vue'
+import LanguagePicker from './library/LanguagePicker.vue'
+import DateRangePicker from './library/DateRangePicker.vue'
+import StarPicker from './library/StarPicker.vue'
 import Divider from 'primevue/divider'
 import Button from 'primevue/button'
 import { useSearchStore } from '@/stores/search-store'
@@ -35,7 +35,7 @@ const handleStarSelectionChange = (payload: { minStarsQuery: string }) => {
   <div class="flex flex-col h-full pr-4 border-r-2">
     <h2 class="text-2xl">Filters</h2>
     <Divider />
-    <LanguageFilters @languageSelectionChange="handleLanguageSelection"></LanguageFilters>
+    <LanguagePicker @languageSelectionChange="handleLanguageSelection"></LanguagePicker>
     <Divider />
     <DateRangePicker @dateRangeSelectionChange="handleDateRangeSelectionChange"></DateRangePicker>
     <Divider />
