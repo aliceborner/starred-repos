@@ -20,7 +20,7 @@ defineProps<{
           <Divider />
         </li>
       </ul>
-      <p v-else>Select search parameters and click on Search!</p>
+      <p v-else>No results yet, please try with another query!</p>
     </template>
   </Card>
 </template>

@@ -12,9 +12,11 @@ const searchStore = useSearchStore()
 
 watch(
   [() => searchStore.searchQuery, () => searchStore.searchSelectedLanguages],
-  ([newSearchQuery, newSearchSelectedLanguages]) => {
-    fetchRepositories(newSearchQuery)
-    selectedLanguages.value = newSearchSelectedLanguages
+  ([newSearchQuery, newSearchSelectedLanguages], [oldSearchQuery]) => {
+    if (newSearchQuery && newSearchQuery !== oldSearchQuery) {
+      fetchRepositories(newSearchQuery)
+      selectedLanguages.value = newSearchSelectedLanguages
+    }
   }
 )
 

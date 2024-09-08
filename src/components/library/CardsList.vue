@@ -21,5 +21,5 @@ const getRepositoriesByLanguage = (language: string) => {
       <CardItem :language="language" :repositories="getRepositoriesByLanguage(language)"></CardItem>
     </li>
   </ul>
-  <p v-else>Select at least one language!</p>
+  <p v-else>Select at least one language, filters and click on Search!</p>
 </template>
