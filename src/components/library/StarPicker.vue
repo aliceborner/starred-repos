@@ -9,7 +9,7 @@ const emit = defineEmits<{
 }>()
 
 const starSelectionChange = () => {
-  let minStarsQuery: string = '+stars:' + minStars.value
+  let minStarsQuery: string = '+stars:>=' + minStars.value
   emit('starSelectionChange', { minStarsQuery })
 }
 </script>
