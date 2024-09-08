@@ -1,26 +1,23 @@
 <script setup lang="ts">
 import CardsList from '@/components/CardsList.vue'
+import { useSearchStore } from '@/stores/search-store'
 import type { SearchResponse } from '@/types/search-response'
-import { ref } from 'vue'
-import TheSidebar from '@/components/TheSidebar.vue'
-
-defineProps({
-  title: {
-    type: String,
-    default: 'Github Repositories'
-  },
-  subtitle: {
-    type: String,
-    default: ''
-  }
-})
+import { ref, watch } from 'vue'
 
 const searchResponse = ref<SearchResponse>()
 const loading = ref(false)
 const error = ref<string | null>(null)
+const searchStore = useSearchStore()
 
-const handleSearch = async (payload: { searchQuery: string }) => {
-  const url = `https://api.github.com/search/repositories?q=${payload.searchQuery}`
+watch(
+  () => searchStore.searchQuery,
+  (newSearchQuery) => {
+    fetchRepositories(newSearchQuery)
+  }
+)
+
+const fetchRepositories = async (newSearchQuery: string) => {
+  const url = `https://api.github.com/search/repositories?q=${newSearchQuery}`
   loading.value = true
   error.value = null
 
@@ -41,14 +38,9 @@ const handleSearch = async (payload: { searchQuery: string }) => {
 </script>
 
 <template>
-  <div class="flex">
-    <aside>
-      <TheSidebar @search="handleSearch" class="min-w-[150px] pr-4" />
-    </aside>
-    <div class="flex flex-col border-l-2 pl-4">
-      <h1 class="text-3xl font-bold">{{ title }}</h1>
-      <CardsList :repositories="searchResponse?.items"></CardsList>
-    </div>
+  <div class="flex flex-col pl-4">
+    <h1 class="text-3xl font-bold">Github Repositories</h1>
+    <CardsList :repositories="searchResponse?.items"></CardsList>
   </div>
 </template>
 

@@ -13,26 +13,24 @@ const formattedDate = () => {
 </script>
 
 <template>
-  <div class="h-full">
-    <Card class="h-full">
-      <template #title
-        ><a :href="repository.html_url" target="_blank">{{ repository.name }}</a></template
-      >
-      <template #content>
-        <div class="flex flex-col space-between gap-4 h-full">
+  <Card class="h-full">
+    <template #title
+      ><a :href="repository.html_url" target="_blank">{{ repository.name }}</a></template
+    >
+    <template #content>
+      <div class="flex flex-col justify-between gap-4 h-full">
+        <p class="m-0">
+          {{ repository.description }}
+        </p>
+        <div>
+          <p class="m-0"><i class="pi pi-calendar mr-2"></i> Created at {{ formattedDate() }}</p>
           <p class="m-0">
-            {{ repository.description }}
+            <i class="pi pi-star mr-2"></i> Stars count {{ repository.stargazers_count }}
           </p>
-          <div class="flex flex-col space-between gap-4 h-full">
-            <p class="m-0"><i class="pi pi-calendar mr-2"></i> Created at {{ formattedDate() }}</p>
-            <p class="m-0">
-              <i class="pi pi-star mr-2"></i> Stars count {{ repository.stargazers_count }}
-            </p>
-          </div>
         </div>
-      </template>
-    </Card>
-  </div>
+      </div>
+    </template>
+  </Card>
 </template>
 
 <style>

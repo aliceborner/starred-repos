@@ -26,6 +26,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <span>From <DatePicker v-model="from" @date-select="dateRangeSelectionChange" /></span>
-  <span>To <DatePicker v-model="to" @date-select="dateRangeSelectionChange" /></span>
+  <div class="flex flex-col gap-2">
+    <label for="from">From</label>
+    <DatePicker id="from" v-model="from" @date-select="dateRangeSelectionChange" showIcon fluid />
+    <label for="to">To</label>
+    <DatePicker id="to" v-model="to" @date-select="dateRangeSelectionChange" showIcon fluid />
+  </div>
 </template>

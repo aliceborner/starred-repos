@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import CardsView from './views/CardsView.vue'
+import TheSidebar from '@/components/TheSidebar.vue'
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col flex-grow p-4">
-    <main>
-      <CardsView />
-    </main>
-  </div>
+  <aside>
+    <TheSidebar />
+  </aside>
+  <main>
+    <CardsView />
+  </main>
 </template>

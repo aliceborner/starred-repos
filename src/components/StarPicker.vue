@@ -15,14 +15,6 @@ const starSelectionChange = () => {
 </script>
 
 <template>
-  <span
-    >With at least
-    <InputNumber
-      v-model="minStars"
-      inputId="integeronly"
-      fluid
-      @update:modelValue="starSelectionChange"
-    />
-    stars</span
-  >
+  <p>Minimum amount of stars</p>
+  <InputNumber v-model="minStars" inputId="integeronly" @update:modelValue="starSelectionChange" />
 </template>

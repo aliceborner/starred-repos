@@ -11,7 +11,7 @@ defineProps({
 </script>
 
 <template>
-  <ul v-if="repositories.length" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <ul v-if="repositories.length" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 py-4">
     <li v-for="repository in repositories" :key="repository.id" class="h-full">
       <CardItem :repository="repository"></CardItem>
     </li>

@@ -59,14 +59,16 @@ const removeNode = (key: string) => {
 </script>
 
 <template>
-  <Chip
-    v-for="(isSelected, key) in selectedLanguages"
-    :key="key"
-    :label="getNodeLabelByKey(key)"
-    @remove="removeNode(key)"
-    removable
-    class="mr-2 mb-2"
-  />
+  <div class="flex">
+    <Chip
+      v-for="(isSelected, key) in selectedLanguages"
+      :key="key"
+      :label="getNodeLabelByKey(key)"
+      @remove="removeNode(key)"
+      removable
+      class="mr-2 mb-2"
+    />
+  </div>
   <slot></slot>
   <TreeSelect
     v-model="selectedLanguages"

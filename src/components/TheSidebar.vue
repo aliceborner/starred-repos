@@ -4,19 +4,18 @@ import DateRangePicker from './DateRangePicker.vue'
 import StarPicker from './StarPicker.vue'
 import Divider from 'primevue/divider'
 import Button from 'primevue/button'
+import { useSearchStore } from '@/stores/search-store'
 
 let languageQuery = ''
 let dateRangeQuery = ''
 let starsQuery = ''
 
-const emit = defineEmits<{
-  (event: 'search', payload: { searchQuery: string }): void
-}>()
+const searchStore = useSearchStore()
 
 const performSearch = () => {
   const suffix = '&sort=stars&order=desc'
   const searchQuery = languageQuery + dateRangeQuery + starsQuery + suffix
-  emit('search', { searchQuery })
+  searchStore.setSearchQuery(searchQuery)
 }
 
 const handleLanguageSelection = (payload: { languagesQuery: string }) => {
@@ -33,7 +32,7 @@ const handleStarSelectionChange = (payload: { minStarsQuery: string }) => {
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col h-full pr-4 border-r-2">
     <h2 class="text-2xl">Filters</h2>
     <Divider />
     <LanguageFilters @languageSelectionChange="handleLanguageSelection"></LanguageFilters>
